@@ -91,7 +91,7 @@ const ForgotPassword = () => {
 const styles = StyleSheet.create({
   mainLogo: {
     marginLeft: 90,
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: '800',
   },
   logoContainer: {

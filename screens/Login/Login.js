@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
 
   mainLogo: {
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: '800',
   },
 
