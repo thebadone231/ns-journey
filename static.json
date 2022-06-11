@@ -1,0 +1,4 @@
+{
+  "root": "web-build/",
+  "routes": { "/**": "App.js" }
+}
