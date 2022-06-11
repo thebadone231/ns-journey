@@ -332,7 +332,7 @@ const NewUser = () => {
 const styles = StyleSheet.create({
   mainLogo: {
     marginLeft: 90,
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: '800',
   },
   logoContainer: {
