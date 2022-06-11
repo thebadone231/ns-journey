@@ -7,7 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/Login/Login';
 import NewUser from './screens/Login/NewUser';
 import ForgotPassword from './screens/Login/ForgotPassword';
-import MainInterface from './screens/MainInterface';
+import MainInterface from './screens/MainInterface/MainInterface';
 import TinderSwiping from './screens/Commander/TinderSwiping';
 import AcceptableLength from './screens/Hair Length Checker/AcceptableLength';
 import LoadingScreen from './screens/Hair Length Checker/LoadingScreen';
