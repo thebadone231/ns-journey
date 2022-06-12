@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useState } from "react";
+import { View, Switch, StyleSheet, Text } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 const UploadImages = () => {
+  const navigation = useNavigation();
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
   return (
-    <View>
-      <Text>
-        TODO: Page for NSFs to upload front and side images of their haircut
-      </Text>
+    <View style={styles.container}>
+      <Text>checker  </Text>
+      <Switch
+        trackColor={{ false: "#D5DDF9", true: "#D5DDF9" }}
+        thumbColor={isEnabled ? "#36E95E" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={()=>{toggleSwitch;navigation.navigate("TinderSwiping")}}
+        value={isEnabled}
+      />
+      <Text>  contribute</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
 
 export default UploadImages;

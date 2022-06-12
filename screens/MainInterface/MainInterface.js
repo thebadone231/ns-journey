@@ -1,5 +1,13 @@
 import React, { useEffect } from 'react';
-import { StatusBar, StyleSheet, Text, View, Image } from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  SafeAreaView,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { Searchbar } from 'react-native-paper';
@@ -42,10 +50,16 @@ const MainInterface = () => {
               <Text style={styles.tinyLogoText}>Date Ideas</Text>
             </View>
             <View style={styles.feature}>
-              <Image
-                style={styles.tinyLogo}
-                source={require('../MainInterface/assets/man-hair.png')}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('UploadImages');
+                }}
+              >
+                <Image
+                  style={styles.tinyLogo}
+                  source={require('../MainInterface/assets/man-hair.png')}
+                />
+              </TouchableOpacity>
               <Text style={styles.tinyLogoText}>Hair Length Checker</Text>
             </View>
           </View>
@@ -150,7 +164,7 @@ const styles = StyleSheet.create({
     flex: 6,
     paddingLeft: 16,
     paddingRight: 16,
-    paddingBottom: 16,
+    paddingBottom: 15,
   },
   bottomNavigationBar: {
     flex: 1.5,
