@@ -13,6 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { handleSignIn } from '../../services/Firebase';
 import { auth } from '../../services/Firebase';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { SafeArea } from '../utility/safeArea.component';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -55,7 +56,7 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.background}>
-      <View style={{ right: 11 }}>
+      <View style={{ right: 11, paddingBottom: 16 }}>
         <Text style={[styles.mainLogo, { left: 8 }]}> Your NS journey </Text>
       </View>
 

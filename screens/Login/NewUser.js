@@ -9,12 +9,13 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/core';
 import { handleSignUp, auth } from '../../services/Firebase';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { SafeArea } from '../utility/safeArea.component';
 
 const NewUser = () => {
   const navigation = useNavigation();
@@ -25,6 +26,8 @@ const NewUser = () => {
   const [visible, setVisibility] = useState({ name: 'eye-off' });
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [rank, setRank] = useState('');
+  const [unit, setUnit] = useState('');
   const [userName, setUserName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [homeAddress, setHomeAddress] = useState('');
@@ -185,6 +188,32 @@ const NewUser = () => {
                 }}
                 textContentType="givenName"
                 placeholder="Last Name"
+                placeholderTextColor="grey"
+                keyboardType="default"
+                returnKeyType="next"
+              />
+            </View>
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.email}
+                defaultValue={rank}
+                onChangeText={(rank) => {
+                  setRank(rank);
+                }}
+                placeholder="Rank"
+                placeholderTextColor="grey"
+                keyboardType="default"
+                returnKeyType="next"
+              />
+            </View>
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.email}
+                defaultValue={unit}
+                onChangeText={(unit) => {
+                  setUnit(unit);
+                }}
+                placeholder="Unit"
                 placeholderTextColor="grey"
                 keyboardType="default"
                 returnKeyType="next"

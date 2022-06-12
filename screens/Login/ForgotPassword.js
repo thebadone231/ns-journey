@@ -9,11 +9,12 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { handleForgotPassword } from '../../services/Firebase';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { SafeArea } from '../utility/safeArea.component';
 
 const ForgotPassword = () => {
   const navigation = useNavigation();
@@ -90,7 +91,7 @@ const ForgotPassword = () => {
 
 const styles = StyleSheet.create({
   mainLogo: {
-    marginLeft: 90,
+    marginLeft: 20,
     fontSize: 30,
     fontWeight: '800',
   },
@@ -121,7 +122,6 @@ const styles = StyleSheet.create({
     width: '80%',
     height: 50,
     marginBottom: 70,
-    //top: -20,
   },
   form: {
     width: '80%',
