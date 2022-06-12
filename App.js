@@ -8,10 +8,10 @@ import NewUser from './screens/Login/NewUser';
 import ForgotPassword from './screens/Login/ForgotPassword';
 import MainInterface from './screens/MainInterface/MainInterface';
 import TinderSwiping from './screens/Commander/TinderSwiping';
-import AcceptableLength from './screens/Hair Length Checker/AcceptableLength';
-import LoadingScreen from './screens/Hair Length Checker/LoadingScreen';
-import UnacceptableLength from './screens/Hair Length Checker/UnacceptableLength';
-import UploadImages from './screens/Hair Length Checker/UploadImages';
+import AcceptableLength from './screens/Hair Length Checker/Screens/AcceptableLength';
+import LoadingScreen from './screens/Hair Length Checker/Screens/LoadingScreen';
+import UnacceptableLength from './screens/Hair Length Checker/Screens/UnacceptableLength';
+import UploadImages from './screens/Hair Length Checker/Screens/UploadImages';
 
 const Stack = createNativeStackNavigator();
 
