@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: -30,
-    paddingBottom: 16,
+    paddingBottom: 15,
   },
   holidayIcon: {
     height: 40,
