@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StatusBar, StyleSheet, SafeAreaView, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, SafeAreaView, Text, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { Searchbar } from 'react-native-paper';
@@ -22,6 +22,7 @@ const MainInterface = () => {
           </View>
           <View style={styles.featureRow}>
             <Text>Buttons</Text>
+            <TouchableOpacity onPress={()=> {navigation.navigate("UploadImages")}}><Text>hair length checker</Text></TouchableOpacity>
           </View>
         </View>
         <View style={styles.ordCountdown}>
