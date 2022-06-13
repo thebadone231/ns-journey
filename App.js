@@ -8,9 +8,7 @@ import NewUser from './screens/Login/NewUser';
 import ForgotPassword from './screens/Login/ForgotPassword';
 import MainInterface from './screens/MainInterface/MainInterface';
 import TinderSwiping from './screens/Commander/TinderSwiping';
-import AcceptableLength from './screens/Hair Length Checker/Screens/AcceptableLength';
 import LoadingScreen from './screens/Hair Length Checker/Screens/LoadingScreen';
-import UnacceptableLength from './screens/Hair Length Checker/Screens/UnacceptableLength';
 import UploadImages from './screens/Hair Length Checker/Screens/UploadImages';
 
 const Stack = createNativeStackNavigator();
@@ -45,19 +43,9 @@ export default function App() {
           component={TinderSwiping}
         />
         <Stack.Screen
-          name="AcceptableLength"
-          options={{ headerShown: false }}
-          component={AcceptableLength}
-        />
-        <Stack.Screen
           name="LoadingScreen"
           options={{ headerShown: false }}
           component={LoadingScreen}
-        />
-        <Stack.Screen
-          name="UnacceptableLength"
-          options={{ headerShown: false }}
-          component={UnacceptableLength}
         />
         <Stack.Screen
           name="UploadImages"

@@ -77,6 +77,7 @@ const UploadImages = () => {
             source={require('../assets/barber.png')}
           />
         </View>
+        <View style={styles.spacer}></View>
         <View style={styles.guide}>
           <Text style={styles.guideText}>
             Please upload the front and side of your current hair
@@ -115,7 +116,12 @@ const UploadImages = () => {
           </View>
         </View>
         <View style={styles.uploadButtonContainer}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('LoadingScreen');
+            }}
+          >
             <Text style={styles.buttonText}>UPLOAD</Text>
           </TouchableOpacity>
         </View>
@@ -243,6 +249,7 @@ const styles = StyleSheet.create({
   },
   spacer: {
     padding: 10,
+    backgroundColor: 'white',
   },
   guide: {
     flex: 1,
