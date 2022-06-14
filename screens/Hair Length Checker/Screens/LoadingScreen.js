@@ -70,24 +70,31 @@ const LoadingScreen = () => {
         <View style={styles.spacer}></View>
         <View style={styles.loading}>
           <View style={styles.loadingAnimationContainer}>
-            {loadingVisible ? (<Progress.CircleSnail
-              animating={loadingVisible}
-              size={150}
-              thickness={10}
-              indeterminate={true}
-              hidesWhenStopped={true}
-            />) : (
-              <View style={{alignItems:'center'}}>
-                <View style={{flex: 2, justifyContent:'center'}}><Text>Finished loading!</Text></View>
-                  <View style={styles.result}>
-                    <View style={{ flex: 1 }}>
-                      <Text style={styles.resultText}>
-                      { acceptableVisible? 'Your hair is short enough!' : 'We suggest that you cut your hair to be safe!'}
-                      </Text>
-                    </View>
+            {loadingVisible ? (
+              <Progress.CircleSnail
+                animating={loadingVisible}
+                size={150}
+                thickness={10}
+                indeterminate={true}
+                hidesWhenStopped={true}
+              />
+            ) : (
+              <View style={{ alignItems: 'center' }}>
+                <View style={{ flex: 2, justifyContent: 'center' }}>
+                  <Text>Finished loading!</Text>
+                </View>
+                <View style={styles.result}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.resultText}>
+                      {acceptableVisible
+                        ? 'Your hair is short enough!'
+                        : 'We suggest that you cut your hair to be safe!'}
+                    </Text>
                   </View>
-              </View>)}
-            </View>
+                </View>
+              </View>
+            )}
+          </View>
         </View>
         <View style={styles.bottomNavigationBar}>
           <View style={styles.tab}>
@@ -129,7 +136,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight,
-    backgroundColor:'white'
+    backgroundColor: 'white',
   },
   toggleContainer: {
     flex: 1,
