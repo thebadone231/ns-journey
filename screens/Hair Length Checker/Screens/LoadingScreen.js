@@ -14,7 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeArea } from '../../utility/safeArea.component';
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
-import AnimatedLoader from 'react-native-animated-loader';
+import LottieView from 'lottie-react-native';
 
 const LoadingScreen = () => {
   const navigation = useNavigation();
@@ -24,7 +24,7 @@ const LoadingScreen = () => {
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   // for visibility of loading animation
-  const [loadingVisible, setLoadingVisible] = useState(true);
+  const [loadingVisible, setLoadingVisible] = useState(false);
 
   // for visibility of result from model
   const [acceptableVisible, setAcceptableVisible] = useState(0);
@@ -37,10 +37,10 @@ const LoadingScreen = () => {
     setTimeout(() => {
       setResult(true); //change this to get acceptable/unacceptable results
       if (result === true) {
-        setLoadingVisible(false);
+        setLoadingVisible(true);
         setAcceptableVisible(1);
       } else {
-        setLoadingVisible(false);
+        setLoadingVisible(true);
         setUnacceptableVisible(1);
       }
     }, 5000);
@@ -61,17 +61,15 @@ const LoadingScreen = () => {
         <View style={styles.spacer}></View>
         <View style={styles.loading}>
           <View style={styles.loadingAnimationContainer}>
-            <AnimatedLoader
-              visible={loadingVisible}
-              overlayColor="rgba(255,255,255,0)"
-              source={require('../assets/9844-loading-40-paperplane.json')}
-              speed={1}
-              animationStyle={styles.lottie}
-            >
-              <Text style={styles.loadingText}>
-                Please wait while our model runs...
-              </Text>
-            </AnimatedLoader>
+            {loadingVisible ? (
+              <Text>Finished loading!</Text>
+            ) : (
+              <LottieView
+                source={require('../assets/9844-loading-40-paperplane.json')}
+                style={styles.lottie}
+                autoPlay
+              />
+            )}
           </View>
           <View style={styles.result}>
             <View style={{ opacity: acceptableVisible, flex: 1 }}>
