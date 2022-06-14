@@ -31,8 +31,6 @@ const LoadingScreen = () => {
   const [unacceptableVisible, setUnacceptableVisible] = useState(0);
 
   // FOR TESTING ONLY, TO BE REPLACED BY MODEL
-  const [result, setResult] = useState('');
-
   function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -49,9 +47,7 @@ const LoadingScreen = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setResult(getRandomBoolean); //change this to get acceptable/unacceptable results
-      console.log(result);
-      if (result === true) {
+      if (getRandomBoolean()) {
         setLoadingVisible(false);
         setAcceptableVisible(1);
       } else {
