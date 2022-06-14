@@ -77,54 +77,53 @@ const UploadImages = () => {
             source={require('../../../assets/barber.png')}
           />
         </View>
-        <View style={styles.spacer}></View>
-        <View style={styles.guide}>
-          <Text style={styles.guideText}>
-            Please upload the front and side of your current hair
-          </Text>
-        </View>
-        <View style={styles.uploadContainer}>
-          <View style={styles.uploadImage}>
-            {frontImage && (
-              <Image
-                source={{ uri: frontImage }}
-                style={{ width: 180, height: 180 }}
-              />
-            )}
-            <View style={styles.spacer}></View>
-            <TouchableOpacity
-              style={styles.uploadButton}
-              onPress={pickFrontImage}
-            >
-              <Text style={styles.buttonText}>FRONT</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.uploadImage}>
-            {sideImage && (
-              <Image
-                source={{ uri: sideImage }}
-                style={{ width: 180, height: 180 }}
-              />
-            )}
-            <View style={styles.spacer}></View>
-            <TouchableOpacity
-              style={styles.uploadButton}
-              onPress={pickSideImage}
-            >
-              <Text style={styles.buttonText}>SIDE</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.uploadButtonContainer}>
+        <View style={{...styles.guide, justifyContent:'flex-end'}}>
+        <Text style={styles.guideText}>
+          Please upload the front and side of your current hair
+        </Text>
+      </View>
+      <View style={styles.uploadContainer}>
+        <View style={styles.uploadImage}>
+          {frontImage && (
+            <Image
+              source={{ uri: frontImage }}
+              style={{ width: 180, height: 180 }}
+            />
+          )}
+          <View style={styles.spacer}></View>
           <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate('LoadingScreen');
-            }}
+            style={styles.uploadButton}
+            onPress={pickFrontImage}
           >
-            <Text style={styles.buttonText}>UPLOAD</Text>
+            <Text style={styles.buttonText}>FRONT</Text>
           </TouchableOpacity>
         </View>
+        <View style={styles.uploadImage}>
+          {sideImage && (
+            <Image
+              source={{ uri: sideImage }}
+              style={{ width: 180, height: 180 }}
+            />
+          )}
+          <View style={styles.spacer}></View>
+          <TouchableOpacity
+            style={styles.uploadButton}
+            onPress={pickSideImage}
+          >
+            <Text style={styles.buttonText}>SIDE</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.uploadButtonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate('LoadingScreen');
+          }}
+        >
+          <Text style={styles.buttonText}>UPLOAD</Text>
+        </TouchableOpacity>
+      </View>
         <View style={styles.toggleContainer}>
           <Text>checker </Text>
           <Switch

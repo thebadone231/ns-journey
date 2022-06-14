@@ -27,8 +27,7 @@ const LoadingScreen = () => {
   const [loadingVisible, setLoadingVisible] = useState(false);
 
   // for visibility of result from model
-  const [acceptableVisible, setAcceptableVisible] = useState(0);
-  const [unacceptableVisible, setUnacceptableVisible] = useState(0);
+  const [acceptableVisible, setAcceptableVisible] = useState(false);
 
   // FOR TESTING ONLY, TO BE REPLACED BY MODEL
   const [result, setResult] = useState('');
@@ -38,10 +37,9 @@ const LoadingScreen = () => {
       setResult(true); //change this to get acceptable/unacceptable results
       if (result === true) {
         setLoadingVisible(true);
-        setAcceptableVisible(1);
+        setAcceptableVisible(true);
       } else {
         setLoadingVisible(true);
-        setUnacceptableVisible(1);
       }
     }, 5000);
   }, []);
@@ -62,7 +60,16 @@ const LoadingScreen = () => {
         <View style={styles.loading}>
           <View style={styles.loadingAnimationContainer}>
             {loadingVisible ? (
-              <Text>Finished loading!</Text>
+              <View style={{alignItems:'center'}}>
+                <View style={{flex: 2, justifyContent:'center'}}><Text>Finished loading!</Text></View>
+                <View style={styles.result}>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.resultText}>
+                  { acceptableVisible? 'Your hair is short enough!' : 'We suggest that you cut your hair to be safe!'}
+                  </Text>
+                </View>
+                </View>
+              </View>
             ) : (
               <LottieView
                 source={require('../assets/9844-loading-40-paperplane.json')}
@@ -71,30 +78,7 @@ const LoadingScreen = () => {
               />
             )}
           </View>
-          <View style={styles.result}>
-            <View style={{ opacity: acceptableVisible, flex: 1 }}>
-              <Text style={styles.resultText}>Your hair is short enough!</Text>
-            </View>
-            <View style={{ opacity: unacceptableVisible, flex: 1 }}>
-              <Text style={styles.resultText}>
-                We suggest that you cut your hair to be safe!
-              </Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.toggleContainer}>
-          <Text>checker </Text>
-          <Switch
-            trackColor={{ false: '#D5DDF9', true: '#D5DDF9' }}
-            thumbColor={isEnabled ? '#36E95E' : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={() => {
-              toggleSwitch;
-              navigation.navigate('TinderSwiping');
-            }}
-            value={isEnabled}
-          />
-          <Text> contribute</Text>
+          
         </View>
         <View style={styles.bottomNavigationBar}>
           <View style={styles.tab}>
@@ -136,6 +120,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight,
+    backgroundColor:'white'
   },
   toggleContainer: {
     flex: 1,

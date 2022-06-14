@@ -14,13 +14,44 @@ import * as ImagePicker from 'expo-image-picker';
 const TinderSwiping = () => {
   const navigation = useNavigation();
 
+  // for uploading of haircut
+  const [frontImage, setFrontImage] = useState(null);
+  const [sideImage, setSideImage] = useState(null);
+
+  //for swiping
   const [picCount, setPicCount] = useState(1);
   const [imageData, setImageData] = useState({});
   const [renderState, setRenderState] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(true);
+  const [isEnabled, setIsEnabled] = useState(false);
   const [alert, setAlert] = useState(true);
 
 
+
+  //for uploading images
+  const pickFrontImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 1,
+    });
+    console.log(result);
+    if (!result.cancelled) {
+      setFrontImage(result.uri);
+    }
+  };
+
+  const pickSideImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 1,
+    });
+    console.log(result);
+    if (!result.cancelled) {
+      setSideImage(result.uri);
+    }
+  };
+
+
+  //for swiping
   const imageDocRef = collection(db, 'images/')
   const onSwipe = (gestureName) => {
     if (gestureName === 'SWIPE_RIGHT') {
@@ -31,20 +62,6 @@ const TinderSwiping = () => {
   };
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-  useEffect(()=>{
-    const getData = async() =>{
-      const images = await getDocs(imageDocRef);
-      let imageDict = {};
-      images.forEach((doc)=>{imageDict[doc.id] = doc.data()});
-      setImageData(imageDict);
-    }
-    getData().then(setRenderState(true)).catch(console.error);
-
-    
-  
-  }, []) 
-
-  let picture;
   const call = (file_name) => {
     let res;
     switch (file_name) {
@@ -73,42 +90,86 @@ const TinderSwiping = () => {
     }
     return res
   }
-  if (renderState === true && Object.keys(imageData).length !== 0) {
-    array = Object.keys(imageData)
-    list_length = array.length
-    const image_ID = array[Math.floor(Math.random() * (list_length))]
-    console.log(image_ID)
-    picture = <Image style= {{width:200, height:250, }} source={call(image_ID)}/>
-  } else {
-    picture = 
-    <View style={{justifyContent:'center', alignItems:'center', flex:1}}>
-      <ActivityIndicator size="large" />
-      <Text>loading image</Text>
+
+  useEffect(()=>{
+
+    const image_upload = async () => {
+      if (Platform.OS !== 'web') {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+      console.log('1');
+    };
+
+    const getData = async() =>{
+      const images = await getDocs(imageDocRef);
+      let imageDict = {};
+      images.forEach((doc)=>{imageDict[doc.id] = doc.data()});
+      setImageData(imageDict);
+      console.log('2');
+    }
+
+    isEnabled ? 
+    getData().then(setRenderState(true)).catch(console.error) :
+    image_upload();
+    
+    
+  
+  }, [isEnabled]) 
+  
+
+  let display = 
+  <View style={{height:'100%', width:'100%'}}>
+    <View style={{...styles.guide, justifyContent:'flex-end'}}>
+      <Text style={styles.guideText}>
+        Please upload the front and side of your current hair
+      </Text>
     </View>
-  }
-
-
-  let component;
+    <View style={styles.uploadContainer}>
+      <View style={styles.uploadImage}>
+        {frontImage && (<Image source={{ uri: frontImage }} style={{ width: 180, height: 180 }}/>)}
+      <View style={styles.spacer}></View>
+        <TouchableOpacity style={styles.uploadButton} onPress={pickFrontImage}>
+          <Text style={styles.buttonText}>FRONT</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.uploadImage}>
+        {sideImage && (
+          <Image source={{ uri: sideImage }} style={{ width: 180, height: 180 }}/>)}
+        <View style={styles.spacer}></View>
+        <TouchableOpacity style={styles.uploadButton} onPress={pickSideImage}>
+          <Text style={styles.buttonText}>SIDE</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+    <View style={styles.uploadButtonContainer}>
+      <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate('LoadingScreen');}}>
+        <Text style={styles.buttonText}>UPLOAD</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+  
   if (isEnabled === true) {
-    component = <View><Text>ello</Text></View>
-  } else {
-    component = <View><Text>nehhhh</Text></View>
-  }
-
-
-  return (
-  <>
-    <SafeArea style={{flex: 1, marginTop: StatusBar.currentHeight, alignItems: 'center', backgroundColor: 'white'}}> 
-
-      <View style={{flex:15, width:'100%', justifyContent:'flex-end', alignItems:'center'}}>
-        <Text style={{fontWeight:'500', fontSize: 35, }}>Hair Length Checker</Text>
-        <Image style={styles.barberImage}
-        source={require('../../assets/barber.png')} />
-      </View> 
-
-
-      <View style={{flex:32, width:'100%',}}>
-        <GestureRecognizer onSwipe={onSwipe} >
+    let picture;
+    if (renderState === true && Object.keys(imageData).length !== 0) {
+      const array = Object.keys(imageData)
+      const list_length = array.length
+      const image_ID = array[Math.floor(Math.random() * (list_length))]
+      console.log(image_ID)
+      picture = <Image style= {{width:200, height:250, }} source={call(image_ID)}/>
+    } else {
+      console.log(renderState)
+      picture = 
+      <View style={{justifyContent:'center', alignItems:'center', flex:1}}>
+        <ActivityIndicator size="large" />
+        <Text>loading image</Text>
+      </View>
+    }
+    display = 
+    <GestureRecognizer onSwipe={onSwipe} >
           <View style={{width:'100%', height:'100%', flexDirection:'row'}}>
             <View style={{flex:4, justifyContent:'center', alignItems:'flex-end'}}>
               <Image style= {{width: 50, height: 50,}} source={require('../../assets/left3--v2.png')} />
@@ -127,7 +188,22 @@ const TinderSwiping = () => {
               <Text style={{fontSize:15, fontWeight:'600'}}>Swipe{'\n'}right to{'\n'}accept</Text>
             </View>
           </View>
-        </GestureRecognizer>
+    </GestureRecognizer>
+  }
+
+  return (
+  <>
+    <SafeArea style={{flex: 1, marginTop: StatusBar.currentHeight, alignItems: 'center', backgroundColor: 'white'}}> 
+
+      <View style={{flex:15, width:'100%', justifyContent:'flex-end', alignItems:'center'}}>
+        <Text style={{fontWeight:'500', fontSize: 35, }}>Hair Length Checker</Text>
+        <Image style={styles.barberImage}
+        source={require('../../assets/barber.png')} />
+      </View> 
+
+
+      <View style={{flex:32, width:'100%',}}>
+        {display}
       </View>
 
 
@@ -218,6 +294,53 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     marginTop:14,
+  },
+  spacer: {
+    padding: 10,
+    backgroundColor: 'white',
+  },
+  guide: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  guideText: {
+    fontSize: 15,
+    fontWeight: '500',
+  },
+  uploadContainer: {
+    flex: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+  },
+  uploadButton: {
+    borderRadius: 8,
+    height: 40,
+    width: '40%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0096FF',
+  },
+  buttonText: {
+    fontSize: 15,
+    color: 'white',
+  },
+  uploadImage: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: 'green',
+    padding: 10,
+    borderRadius: 8,
+  },
+  uploadButtonContainer: {
+    flex: 2,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
