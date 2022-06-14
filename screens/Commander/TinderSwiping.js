@@ -60,7 +60,7 @@ const TinderSwiping = () => {
       setPicCount(picCount+1)
     }
   };
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   const call = (file_name) => {
     let res;
@@ -101,7 +101,7 @@ const TinderSwiping = () => {
           alert('Sorry, we need camera roll permissions to make this work!');
         }
       }
-      console.log('1');
+      console.log('lol');
     };
 
     const getData = async() =>{
@@ -115,8 +115,6 @@ const TinderSwiping = () => {
     isEnabled ? 
     getData().then(setRenderState(true)).catch(console.error) :
     image_upload();
-    
-    
   
   }, [isEnabled]) 
   
@@ -213,7 +211,7 @@ const TinderSwiping = () => {
           trackColor={{ false: "#D5DDF9", true: "#D5DDF9" }}
           thumbColor={isEnabled ? "#36E95E" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
+          onValueChange={()=>{setIsEnabled(!isEnabled);console.log(isEnabled)}}
           value={isEnabled}
         />
         <Text>  Contribute</Text>
