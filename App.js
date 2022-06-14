@@ -9,7 +9,6 @@ import ForgotPassword from './screens/Login/ForgotPassword';
 import MainInterface from './screens/MainInterface/MainInterface';
 import TinderSwiping from './screens/Commander/TinderSwiping';
 import LoadingScreen from './screens/Hair Length Checker/Screens/LoadingScreen';
-import UploadImages from './screens/Hair Length Checker/Screens/UploadImages';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,11 +45,6 @@ export default function App() {
           name="LoadingScreen"
           options={{ headerShown: false }}
           component={LoadingScreen}
-        />
-        <Stack.Screen
-          name="UploadImages"
-          options={{ headerShown: false }}
-          component={UploadImages}
         />
       </Stack.Navigator>
     </NavigationContainer>
