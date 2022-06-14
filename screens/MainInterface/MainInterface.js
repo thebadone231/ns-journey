@@ -52,7 +52,7 @@ const MainInterface = () => {
             <View style={styles.feature}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('TinderSwiping');
+                  navigation.navigate('UploadImages');
                 }}
               >
                 <Image

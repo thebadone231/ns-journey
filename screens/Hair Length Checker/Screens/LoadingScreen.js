@@ -14,7 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeArea } from '../../utility/safeArea.component';
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
-import LottieView from 'lottie-react-native';
+import * as Progress from 'react-native-progress';
 
 const LoadingScreen = () => {
   const navigation = useNavigation();
@@ -24,7 +24,7 @@ const LoadingScreen = () => {
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   // for visibility of loading animation
-  const [loadingVisible, setLoadingVisible] = useState(false);
+  const [loadingVisible, setLoadingVisible] = useState(true);
 
   // for visibility of result from model
   const [acceptableVisible, setAcceptableVisible] = useState(0);
@@ -33,14 +33,29 @@ const LoadingScreen = () => {
   // FOR TESTING ONLY, TO BE REPLACED BY MODEL
   const [result, setResult] = useState('');
 
+  function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+  }
+
+  const getRandomBoolean = () => {
+    if (getRandomIntInclusive(0, 1) === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   useEffect(() => {
     setTimeout(() => {
-      setResult(true); //change this to get acceptable/unacceptable results
+      setResult(getRandomBoolean); //change this to get acceptable/unacceptable results
+      console.log(result);
       if (result === true) {
-        setLoadingVisible(true);
+        setLoadingVisible(false);
         setAcceptableVisible(1);
       } else {
-        setLoadingVisible(true);
+        setLoadingVisible(false);
         setUnacceptableVisible(1);
       }
     }, 5000);
@@ -61,15 +76,13 @@ const LoadingScreen = () => {
         <View style={styles.spacer}></View>
         <View style={styles.loading}>
           <View style={styles.loadingAnimationContainer}>
-            {loadingVisible ? (
-              <Text>Finished loading!</Text>
-            ) : (
-              <LottieView
-                source={require('../assets/9844-loading-40-paperplane.json')}
-                style={styles.lottie}
-                autoPlay
-              />
-            )}
+            <Progress.CircleSnail
+              animating={loadingVisible}
+              size={150}
+              thickness={10}
+              indeterminate={true}
+              hidesWhenStopped={true}
+            />
           </View>
           <View style={styles.result}>
             <View style={{ opacity: acceptableVisible, flex: 1 }}>
