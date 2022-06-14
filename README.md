@@ -190,6 +190,8 @@ Display next public holiday.
 <div id="#challenges"></div>
 <br />
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ## Challenges
 
 ### 1. Low accuracy of model due to a lack of datasets
