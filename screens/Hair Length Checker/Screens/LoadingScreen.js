@@ -55,7 +55,7 @@ const LoadingScreen = () => {
         <View style={styles.barber}>
           <Image
             style={styles.barberImage}
-            source={require('../assets/barber.png')}
+            source={require('../../../assets/barber.png')}
           />
         </View>
         <View style={styles.spacer}></View>
