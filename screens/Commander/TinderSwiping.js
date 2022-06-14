@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { View, Switch, StyleSheet, Text, Image, ActivityIndicator } from "react-native";
+import { View, Switch, StyleSheet, Text, Image, ActivityIndicator, TouchableOpacity, StatusBar, Platform,} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { db } from '../../services/Firebase';
 import {getDocs, collection} from 'firebase/firestore';
+
+import { SafeArea } from '../utility/safeArea.component';
+import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
+import { Ionicons } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
 
 const TinderSwiping = () => {
   const navigation = useNavigation();
@@ -92,15 +97,17 @@ const TinderSwiping = () => {
 
 
   return (
-    <View style={{flex: 1, alignItems: 'center', backgroundColor: '#D5DDF9'}}> 
+  <>
+    <SafeArea style={{flex: 1, marginTop: StatusBar.currentHeight, alignItems: 'center', backgroundColor: 'white'}}> 
 
-      <View style={{flex:13, width:'100%', justifyContent:'flex-end', alignItems:'center'}}>
+      <View style={{flex:15, width:'100%', justifyContent:'flex-end', alignItems:'center'}}>
         <Text style={{fontWeight:'500', fontSize: 35, }}>Hair Length Checker</Text>
-        <Image style= {styles.imageDimension} source={require('../../assets/fashion-trend.png')} />
+        <Image style={styles.barberImage}
+        source={require('../../assets/barber.png')} />
       </View> 
 
 
-      <View style={{flex:25, width:'100%',}}>
+      <View style={{flex:32, width:'100%',}}>
         <GestureRecognizer onSwipe={onSwipe} >
           <View style={{width:'100%', height:'100%', flexDirection:'row'}}>
             <View style={{flex:4, justifyContent:'center', alignItems:'flex-end'}}>
@@ -124,7 +131,7 @@ const TinderSwiping = () => {
       </View>
 
 
-      <View style={{flex:6, ...styles.toggle}}>
+      <View style={{flex:4, ...styles.toggle}}>
         <Text>Checker  </Text>
         <Switch
           trackColor={{ false: "#D5DDF9", true: "#D5DDF9" }}
@@ -137,8 +144,29 @@ const TinderSwiping = () => {
       </View>
 
 
-      <View style={{flex:4, width:'100%', justifyContent:'center', alignItems:'center'}}>
-        <Text>Bottom Navigation Bar</Text>
+      <View style={{flex:4, backgroundColor: 'white', flexDirection: 'row', justifyContent: 'space-between', alignItems:'flex-end'}}>
+        <View style={styles.tab}>
+            <TouchableOpacity onPress={() => {navigation.navigate('MainInterface');}}>
+              <Ionicons name="md-home" size={30} color="black" />
+            </TouchableOpacity>
+            <Text style={styles.tabText}>Home</Text>
+          </View>
+          <View style={styles.tab}>
+            <Ionicons name="md-notifications" size={30} color="black" />
+            <Text style={styles.tabText}>Notifications</Text>
+          </View>
+          <View style={styles.tab}>
+            <Ionicons name="md-help" size={30} color="black" />
+            <Text style={styles.tabText}>FAQ</Text>
+          </View>
+          <View style={styles.tab}>
+            <Ionicons name="md-person" size={30} color="black" />
+            <Text style={styles.tabText}>Profile</Text>
+          </View>
+          <View style={styles.tab}>
+            <Ionicons name="md-settings" size={30} color="black" />
+            <Text style={styles.tabText}>Settings</Text>
+          </View>
       </View>
 
       {picCount >= 11 && <AwesomeAlert
@@ -154,7 +182,9 @@ const TinderSwiping = () => {
           navigation.navigate('MainInterface')}}/>
       }
 
-    </View>
+    </SafeArea>
+    <ExpoStatusBar style="auto" />
+  </>
   );
 };
 
@@ -167,7 +197,27 @@ const styles = StyleSheet.create({
   imageDimension: {
     width: 100,
     height: 90,
-    marginTop:8
+    marginTop:13
+  },
+  bottomNavigationBar: {
+    flex: 1.5,
+    padding: 5,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  tab: {
+    flex: 1,
+    paddingBottom: 5,
+    alignItems: 'center',
+  },
+  tabText: {
+    fontSize: 8,
+  },
+  barberImage: {
+    width: 100,
+    height: 100,
+    marginTop:14,
   },
 });
 
