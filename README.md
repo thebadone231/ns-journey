@@ -54,11 +54,10 @@ Hence, we came up with the idea of having a NS superapp, which serves as a one-s
 However, due to the time constraints, we will be mainly focusing on one key feature, which is using machine learning to check if one's hair length is acceptable. NSFs tend to be unaware of the haircut standards imposed by their unit and might therefore land themselves into trouble due to unacceptable haircuts. As a result, they may thus have to spend more time and money to go for another haircut. Machine learning (built using transfer learning principles) is just the right solution needed to make the judgement for them!
 
 After going through a secure login interface, users are greeted with a homepage with many features. When they go into the hair length checker feature, they are prompted to upload a front and side image of their current haircut. After which, the images uploaded are passed through our model and a judgement is returned to the user.
-  
+
 Commanders can toggle between the hair length checker and contribution feature freely on the same screen. In the contribute feature, commanders are presented with 10 images of haircuts to which they can choose to swipe left or right based on the whether it would be acceptable. Their feedback will be taken in account during the subsequent refining of the model. They are rewarded with some emart credits for their kind contribution.
 
-We understand that different units have different standards, thus plans were made for our model to take in this information. This feature will be implemented in future. 
-  
+We understand that different units have different standards, thus plans were made for our model to take in this information. This feature will be implemented in future.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -99,6 +98,11 @@ To get a local copy up and running follow these simple example steps.
    ```
 
 Alternatively, you can download the apk file from https://expo.dev/artifacts/eas/abQcxEV7qK2vMTeBFiLqGE.apk (highly recommended for full experience)
+
+You may use the following login details if the server is done and the sign up function does not work as planned.
+
+Email: test001@gmail.com
+Password:12345678
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 <div id="#usage"></div>
