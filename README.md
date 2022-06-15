@@ -99,7 +99,7 @@ To get a local copy up and running follow these simple example steps.
 
 Alternatively, you can download the apk file from https://expo.dev/artifacts/eas/abQcxEV7qK2vMTeBFiLqGE.apk (highly recommended for full experience)
 
-You may use the following login details if the server is done and the sign up function does not work as planned.
+You may use the following login details if the server is down and the sign up function does not work as planned.
 
 Email: test001@gmail.com
 Password:12345678
